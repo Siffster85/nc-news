@@ -13,3 +13,9 @@ export function getArticleByID(id) {
         return data
     })
 }
+
+export function getComments(id) {
+    return newsAPI.get(`/articles/${id}/comments`).then(({ data }) => {
+        return data
+    })
+}

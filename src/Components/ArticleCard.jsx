@@ -23,7 +23,7 @@ const ArticleCard = () => {
     return (
     <>
     <Card>
-        <Card.Title className="my-1 py-0 text-start">{article.title}</Card.Title>
+        <Card.Title className="my-1 fs-4 py-0 text-start">{article.title}</Card.Title>
         <Card.Subtitle className="mt-1 my-1 py-0 text-start text-muted">Topic: {article.topic}</Card.Subtitle>
         <Card.Subtitle className="mt-1 my-1 py-0 text-start text-muted">Author: {article.author}</Card.Subtitle>
         <Card.Subtitle className="mt-1 my-1 py-0 text-start text-muted">Posted at: {dateFormat(article.created_at, "mmmm dS, yyyy, HH:MM")}</Card.Subtitle>
@@ -33,10 +33,10 @@ const ArticleCard = () => {
            {article.body}
           </Card.Text>
             <Card.Subtitle className="mt-1 my-1 py-1"> Votes: {article.votes}</Card.Subtitle>
-            <Button className="ms-1 mt-1" variant="primary">Upvote</Button>
-            <Button className="ms-1 mt-1" variant="secondary">Downvote</Button>
+            <Button className="mx-2 mt-1" variant="primary">Upvote</Button>
+            <Button className="ms-2 mt-1" variant="secondary">Downvote</Button>
         </Card.Body>
-    </Card>
+    </Card>		
     </>)};
 };
 
