@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getArticleByID, patchArticle } from '../../api';
+import { getArticleByID, patchArticle } from '../api';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import dateFormat from 'dateformat';
@@ -55,7 +55,7 @@ const ArticleCard = () => {
             <Button className="mx-2 mt-1" variant="primary" onClick={handleUpVote}>Upvote</Button>
             <Button className="ms-2 mt-1" variant="secondary" onClick={handleDownVote}>Downvote</Button>
         </Card.Body>
-    </Card>		
+    </Card>	
     </>)};
 };
 

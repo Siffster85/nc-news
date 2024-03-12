@@ -25,3 +25,15 @@ export function patchArticle(vote, id){
         return data
     })
 }
+
+export function getUsers() {
+	return newsAPI.get('/users').then(({ data }) => {
+		return data
+	})
+}
+
+export function postComment(data, id) {
+    return newsAPI.post(`/articles/${id}/comments`, data).then(({ data }) => {
+        return data
+    })
+}
