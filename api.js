@@ -19,3 +19,9 @@ export function getComments(id) {
         return data
     })
 }
+
+export function patchArticle(vote, id){
+    return newsAPI.patch(`/articles/${id}`, {inc_votes: vote}).then(({ data }) => {
+        return data
+    })
+}
