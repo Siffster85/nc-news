@@ -1,20 +1,21 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import dateFormat from 'dateformat';
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import ActiveUserContext from '../Context/ActiveUser'
 import { deleteComment } from '../api';
 
 
 const CommentListCard = (props) => {
   const { activeUser } = useContext(ActiveUserContext)
+  const [ deletedComment, setDeletedCommet ] = useState()
 
   function handleDelete() {
-		deleteComment(props.comment.comment_id)
+    const commentID = props.comment.comment_id
+		deleteComment(commentID)
 			.then(() => {
 				props.setComments((currentComments)=> {
-					const updatedComments = [...currentComments]
-					return updatedComments
+					return currentComments.filter((comment) => comment.comment_id !== commentID)
 				})
 			})
   }
