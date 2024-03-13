@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import { useEffect, useState } from 'react'
-import { getArticles } from '../../api'
+import { getArticles } from '../api'
 import { Link } from 'react-router-dom';
 
 function ArticleList() {
