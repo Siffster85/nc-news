@@ -30,7 +30,7 @@ const CommentsList = () => {
         <Row>
             {comments.map((comment) => {
                 return (
-                <CommentListCard key={comment.comment_id} comment={comment} />
+                <CommentListCard key={comment.comment_id} comment={comment} setComments={setComments} setIsLoading={setIsLoading} />
                 )
             })}
         </Row>

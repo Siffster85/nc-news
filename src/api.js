@@ -37,3 +37,7 @@ export function postComment(data, id) {
         return data
     })
 }
+
+export function deleteComment(id) {
+    return newsAPI.delete(`/comments/${id}`)
+}
