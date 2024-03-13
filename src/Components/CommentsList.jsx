@@ -26,7 +26,7 @@ const CommentsList = () => {
     return (
         <Container>
         <h3>Comments</h3> 
-        <AddComment />
+        <AddComment setComments={setComments} setIsLoading={setIsLoading}/>
         <Row>
             {comments.map((comment) => {
                 return (
