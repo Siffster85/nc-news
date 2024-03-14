@@ -1,17 +1,26 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import { useEffect, useState } from 'react'
-import { getArticles } from '../api'
+import { getArticles, getTopics } from '../api'
 import { Link } from 'react-router-dom';
 
 function ArticleList() {
+  const queryParameters = new URLSearchParams(window.location.search)
+	let topic = queryParameters.get('topic')
+	let queries = {}
+  console.log(queries, 'query');
+
+	if (topic) {
+		queries.topic = topic
+	}
     const [articles, setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-    getArticles().then(({data}) => {
+    getArticles(queries).then(({data}) => {
         setArticles(data)
         })
         setIsLoading(false)

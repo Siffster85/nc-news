@@ -1,7 +1,9 @@
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import Auth from './Auth'
 
 function Header() {
@@ -16,7 +18,7 @@ function Header() {
 						style={{ maxHeight: '100px' }}
 						navbarScroll
 					>
-						<Nav.Link href="/articles">Articles</Nav.Link>
+						<Nav.Link href="/topics">Topics</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 				<Auth />
