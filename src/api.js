@@ -4,7 +4,10 @@ const newsAPI = axios.create({
 	baseURL: 'https://yls-news.onrender.com/api/',
 })
 
-export function getArticles() {
+export function getArticles(queries) {
+    if(queries) {
+        return newsAPI.get('/articles', { params: queries })
+    }
     return newsAPI.get('/articles')
 }
 
@@ -40,4 +43,8 @@ export function postComment(data, id) {
 
 export function deleteComment(id) {
     return newsAPI.delete(`/comments/${id}`)
+}
+
+export function getTopics() {
+    return newsAPI.get('/topics')
 }

@@ -8,17 +8,19 @@ import CommentsList from './Components/CommentsList'
 import Header from './Components/Header'
 import User from './Components/User'
 import Account from './Components/Account'
+import Topics from './Components/Topics'
 import ActiveUserContext from './Context/ActiveUser'
 
 function App() {
 	const [activeUser, setActiveUser] = useState(
-		JSON.parse(localStorage.getItem('user'))
+		{ username: 'jessjelly' }  
   )
   return (
     <ActiveUserContext.Provider value={{ activeUser, setActiveUser }}>
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/topics" element={<Topics />} />
       <Route path="/articles" element={<ArticleList />} />
       <Route path="/articles/:article_id" element={<><ArticleCard/><CommentsList/></>} />
       <Route path="/users" element={<User />} />
