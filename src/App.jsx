@@ -9,6 +9,7 @@ import Header from './Components/Header'
 import User from './Components/User'
 import Account from './Components/Account'
 import Topics from './Components/Topics'
+import Error from './Components/Error'
 import ActiveUserContext from './Context/ActiveUser'
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
       <Route path="/articles/:article_id" element={<><ArticleCard/><CommentsList/></>} />
       <Route path="/users" element={<User />} />
       <Route path="/users/:username" element={<Account />} />
-     
+      <Route path="/error" element={<Error />} />
     </Routes>
     </ActiveUserContext.Provider>
   )

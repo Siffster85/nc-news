@@ -5,7 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { useEffect, useState } from 'react'
 import { getArticles } from '../api'
-import { Link  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 
 function ArticleList() {
   const [sortOrder, setSortOrder] = useState('desc');
@@ -35,15 +35,26 @@ function ArticleList() {
     useEffect(() => {
     getArticles(queries).then(({data}) => {
         setArticles(data)
+        }).then(()=>{
+          setIsLoading(false)
+        }).catch((err) => {
+          if(err){
+            console.log(err.response);
+          }
         })
-        setIsLoading(false)
     }, [])
 
     const handleSort = () => {
-      getArticles(queries).then(({data}) => {
+      getArticles(queries)
+      .then(({data}) => {
         setArticles(data)
         })
-        setIsLoading(false)
+      .then(()=>{
+          setIsLoading(false)
+        })
+      .catch((err) => {
+          console.log(err.response)
+          })
     }
 
     if(isLoading){
