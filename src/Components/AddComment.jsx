@@ -50,7 +50,7 @@ const AddComment = (props) => {
 				</InputGroup>
 				<div className="" style={{ padding: '20px' }}>
 					<button
-						className="btn btn-md btn-dark"
+						className="btn btn-md btn-dark" data-toggle="button"
 						onClick={handleSubmit}
 					>
 						Submit
