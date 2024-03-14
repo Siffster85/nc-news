@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/esm/Container';
 
 const CommentListCard = (props) => {
   const { activeUser } = useContext(ActiveUserContext)
-  const [error, setError] = useState('')
+  const error = 'Something has gone wrong, please try again'
 	const [showError, setShowError] = useState(false) 
 
   function handleDelete() {
@@ -24,7 +24,7 @@ const CommentListCard = (props) => {
 				})
 			})			
       .catch((err) => {
-				setError(err.msg)
+        console.log(err);
 				setShowError(true)
 			})
   }
@@ -46,7 +46,7 @@ const CommentListCard = (props) => {
             <Card.Text className="mt-2">
             <Button className="me-2" variant="primary">Upvote</Button>
             <Button className="mx-2" variant="secondary">Downvote</Button> Votes: {props.comment.votes} 
-            <Button className="ms-2" variant="danger" onClick={handleDelete}>Delete</Button></Card.Text>
+            <Button className="ms-2" data-toggle="button" variant="danger" onClick={handleDelete}>Delete</Button></Card.Text>
           </Card.Body>
         </Card>
         </Container>
