@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import ActiveUserContext from '../Context/ActiveUser'
 import { useParams } from 'react-router-dom'
 import { postComment } from '../api';
