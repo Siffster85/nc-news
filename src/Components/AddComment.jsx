@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 const AddComment = (props) => {
     const[newComment, setNewComment] = useState({username: '', body: ''})
@@ -58,13 +59,12 @@ const AddComment = (props) => {
 						onChange={handleChange}
 					/>
 				</InputGroup>
-				<div className="" style={{ padding: '20px' }}>
-					<button
-						className="btn btn-md btn-dark" data-toggle="button"
+				<div>
+				<Button variant="success"data-toggle="button"
 						onClick={handleSubmit}
 					>
 						Submit
-					</button>
+					</Button>
 				</div>
 			</Container>
             

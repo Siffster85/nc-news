@@ -5,17 +5,36 @@
   text-align: center;
 }
 
+body{
+  background-image: url('../News\ Banner.jpg');
+}
+
+h1{
+  margin: 10px auto 0px auto;
+  background-color: aliceblue;
+  width: 40%;
+  text-align:center;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-bottom: 5px;
+  }
+
+
 .card {
   padding: 2em;
+  border-radius: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+
+img{
+  border-radius: 15px;
+  border: 5px solid rgb(255, 255, 255);
 }
 
-.item-image{
-  margin: auto;
-  width: 80%;
-  height: auto;
-  padding: 10px;
+.container{
+    border-radius: 15px;
+}
+
+.navbar{
+  margin-bottom: 10px;
 }
