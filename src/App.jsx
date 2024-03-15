@@ -8,7 +8,6 @@ import CommentsList from './Components/CommentsList'
 import Header from './Components/Header'
 import User from './Components/User'
 import Account from './Components/Account'
-import Topics from './Components/Topics'
 import Error from './Components/Error'
 import ActiveUserContext from './Context/ActiveUser'
 
@@ -21,7 +20,6 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/topics" element={<Topics />} />
       <Route path="/articles" element={<ArticleList />} />
       <Route path="/articles/:article_id" element={<><ArticleCard/><CommentsList/></>} />
       <Route path="/users" element={<User />} />
