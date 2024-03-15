@@ -10,6 +10,7 @@ import User from './Components/User'
 import Account from './Components/Account'
 import Error from './Components/Error'
 import ActiveUserContext from './Context/ActiveUser'
+import BackgroundImagePage from './Components/BackgroundImagePage'
 
 function App() {
 	const [activeUser, setActiveUser] = useState(
@@ -17,6 +18,7 @@ function App() {
   )
   return (
     <ActiveUserContext.Provider value={{ activeUser, setActiveUser }}>
+    <BackgroundImagePage />
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />

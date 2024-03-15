@@ -4,9 +4,14 @@
   padding: 2rem;
   text-align: center;
 }
+body, html {
+  height: 100%;
+}
 
-body{
-  background-image: url('../News\ Banner.jpg');
+.bg{
+  background-image: url('./Images/News\ Banner.jpg');
+  background-position: center;
+  background-size: cover
 }
 
 h1{
