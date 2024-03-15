@@ -5,14 +5,19 @@ import { postComment } from '../api';
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert';
 
 const AddComment = (props) => {
     const[newComment, setNewComment] = useState({username: '', body: ''})
 
     const { activeUser } = useContext(ActiveUserContext)
 	const {article_id} = useParams('article_id')
+	const [showError, setShowError] = useState(false) 
 
     function handleSubmit() {
+		if(newComment.body.length === 0){
+			setShowError(true)
+		} else {
 		props.setIsLoading(true);
 		postComment(newComment, article_id)
 			.then((data) => {
@@ -24,6 +29,7 @@ const AddComment = (props) => {
 				setNewComment({username: '', body: ''})
 				props.setIsLoading(false)
 			})
+		}
 	}
 
     function handleChange(event) {
@@ -38,6 +44,10 @@ const AddComment = (props) => {
     return (
         <div>
         <Container>
+			<ShowMessage
+			showError={showError}
+			setShowError={setShowError}
+			/>
 				<InputGroup>
 				<InputGroup.Text>Add New Comment</InputGroup.Text>
 					<Form.Control
@@ -61,5 +71,15 @@ const AddComment = (props) => {
         </div>
     );
 };
+
+function ShowMessage({ showError, setShowError}) {
+	if (showError) {
+	  return (
+		<Alert variant="danger">
+		<p>You can't submit an empty comment.</p>
+		</Alert>
+		)
+	  }
+  }
 
 export default AddComment;

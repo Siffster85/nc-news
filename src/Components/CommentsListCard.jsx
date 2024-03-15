@@ -4,7 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import dateFormat from 'dateformat';
 import { useContext, useState } from 'react'
 import ActiveUserContext from '../Context/ActiveUser'
-import { deleteComment } from '../api';
+import { deleteComment, patchComment } from '../api';
 import Container from 'react-bootstrap/esm/Container';
 
 
@@ -12,7 +12,7 @@ const CommentListCard = (props) => {
   const { activeUser } = useContext(ActiveUserContext)
   const error = 'Something has gone wrong, please try again'
 	const [showError, setShowError] = useState(false) 
-  const [votes, setVotes] = useState('')
+  const [votes, setVotes] = useState(props.comment.votes)
   const [err, setErr] = useState(null);
 
   function handleDelete() {
@@ -26,26 +26,27 @@ const CommentListCard = (props) => {
 				})
 			})			
       .catch((err) => {
-        console.log(err.response);
+        setErr(err.response.msg)
 				setShowError(true)
 			})
   }
- //need to get vote state sorted
  
   const handleUpVote = (event) => {
-    setVotes((currentVote) => currentVote +1);
+    const commentID = props.comment.comment_id
+    setVotes((currentVotes) => currentVotes +1);
     setErr(null)
-    patchComment(1, comment_id).catch((err) => {
-        setVotes((currentVote) => currentVote -1)
-        setErr(err)
+    patchComment(1, commentID).catch((err) => {
+        setVotes((currentVotes) => currentVotes -1)
+        setErr(err.response.msg)
     })
   }
   function handleDownVote(event){
-      setVotes((currentVote) => currentVote -1);
-      setErr(null)
-      patchComment(-1, comment_id).catch((err) => {
-          setVotes((currentVote) => currentVote +1)
-          setErr(err)
+    const commentID = props.comment.comment_id
+    setVotes((currentVotes) => currentVotes -1);
+    setErr(null)
+    patchComment(-1, commentID).catch((err) => {
+        setVotes((currentVotes) => currentVotes +1)
+        setErr(err.response.msg)
       })
   };
 
@@ -65,7 +66,7 @@ const CommentListCard = (props) => {
            </Card.Subtitle>
             <Card.Text className="mt-2">
             <Button className="me-2" variant="primary" onClick={handleUpVote}>Upvote</Button>
-            <Button className="mx-2" variant="secondary" onClick={handleDownVote}>Downvote</Button> Votes: {props.comment.votes} 
+            <Button className="mx-2" variant="secondary" onClick={handleDownVote}>Downvote</Button> Votes: {votes} 
             <Button className="ms-2" data-toggle="button" variant="danger" onClick={handleDelete}>Delete</Button></Card.Text>
           </Card.Body>
         </Card>
@@ -80,8 +81,8 @@ const CommentListCard = (props) => {
             <Card.Subtitle className="mt-2 text-muted">Author: {props.comment.author}
            </Card.Subtitle>
             <Card.Text className="mt-2">
-            <Button className="me-2" variant="primary">Upvote</Button>
-            <Button className="mx-2" variant="secondary">Downvote</Button> Votes: {props.comment.votes} </Card.Text>
+            <Button className="me-2" variant="primary" onClick={handleUpVote}>Upvote</Button>
+            <Button className="mx-2" variant="secondary" onClick={handleDownVote}>Downvote</Button> Votes: {votes} </Card.Text>
           </Card.Body>
         </Card>
       );
