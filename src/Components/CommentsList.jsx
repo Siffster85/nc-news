@@ -12,16 +12,23 @@ const CommentsList = () => {
     const {article_id} = useParams('article_id')
     const [isLoading, setIsLoading] = useState(true)
     const { activeUser } = useContext(ActiveUserContext)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         getComments(article_id).then((comments) => {
             setComments(comments)
-        })
+        }).then(() =>{
         setIsLoading(false)
+    }).catch((err) =>{
+        setError(err.response.data.msg)
+        setIsLoading(false)
+    })
     }, [])
 
     if(isLoading){
         return <h1>Comments loading...</h1>}
+        else if(error){
+        return}
         else if(activeUser){
     return (
         <Container>

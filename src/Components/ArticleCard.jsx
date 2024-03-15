@@ -4,40 +4,66 @@ import { getArticleByID, patchArticle } from '../api';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import dateFormat from 'dateformat';
+import { useTimeout } from 'usehooks-ts'
 
 const ArticleCard = () => {
     const [article, setArticle] = useState({})
     const {article_id} = useParams('article_id')
     const [isLoading, setIsLoading] = useState(true)
     const [votes, setVotes] = useState('')
-    const [err, setErr] = useState(null);
+    const [error, setError] = useState(false)
+    const [timedOut, setTimedOut] = useState(false)
 
     useEffect(() => {
-        getArticleByID(article_id).then((article) => {
+        getArticleByID(article_id)
+        .then((article) => {
             setArticle(article)
             setVotes(article.votes)
-        })
+        }).then(() =>{
         setIsLoading(false)
+        }).catch((err) =>{
+            setError(err.response.data.msg)
+            setIsLoading(false)
+        })
     }, [])
     const handleUpVote = (event) => {
         setVotes((currentVote) => currentVote +1);
-        setErr(null)
+        setError(null)
         patchArticle(1, article_id).catch((err) => {
             setVotes((currentVote) => currentVote -1)
-            setErr(err)
+            setError(err)
         })
     }
     function handleDownVote(event){
         setVotes((currentVote) => currentVote -1);
-        setErr(null)
+        setError(null)
         patchArticle(-1, article_id).catch((err) => {
             setVotes((currentVote) => currentVote +1)
-            setErr(err)
+            setError(err)
         })
     };
 
-    if(isLoading){
-        return <h1>Article loading...</h1>}
+    const failed = () => {
+        setTimedOut(true)
+      }
+  
+      useTimeout(failed, 5000)
+  
+      if(isLoading){
+        return (
+        <>
+        <h1>
+        {timedOut ? "Something has gone wrong, please try again"
+        : "Articles are loading..."}
+        </h1>
+        </>)} else if (error){
+          return (
+            <>
+            <h1>{error}</h1>
+            <h2>Please return to the <a href="/">homepage</a> and try again</h2>
+            </>
+          )
+        }
         else {
     return (
     <>

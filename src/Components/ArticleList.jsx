@@ -5,13 +5,16 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { useEffect, useState } from 'react'
 import { getArticles } from '../api'
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useTimeout } from 'usehooks-ts'
 
 function ArticleList() {
   const [sortOrder, setSortOrder] = useState('desc');
   const [sortByValue, setSortByValue] = useState('created_at');
   const [articles, setArticles] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [timedOut, setTimedOut] = useState(false)
+  const [error, setError] = useState(false)
 
   const sortBy = [
     { name: 'Date', value: 'created_at' },
@@ -35,19 +38,54 @@ function ArticleList() {
     useEffect(() => {
     getArticles(queries).then(({data}) => {
         setArticles(data)
+        if(data.msg){
+          setError(data.msg)
+        }
+        }).then(()=>{
+          setIsLoading(false)
+        }).catch((err) => {
+          if(err){
+            setError(err.response.data.msg)
+            setIsLoading(false)
+          }
         })
-        setIsLoading(false)
     }, [])
 
     const handleSort = () => {
-      getArticles(queries).then(({data}) => {
+      getArticles(queries)
+      .then(({data}) => {
         setArticles(data)
         })
+      .then(()=>{
+          setIsLoading(false)
+        })
+      .catch((err) => {
+        setError(err.response.data.msg)
         setIsLoading(false)
+          })
     }
 
+    const failed = () => {
+      setTimedOut(true)
+    }
+
+    useTimeout(failed, 5000)
+
     if(isLoading){
-      return <h1>Articles are loading...</h1>}
+      return (
+      <>
+      <h1>
+      {timedOut ? "Something has gone wrong, please try again"
+      : "Articles are loading..."}
+      </h1>
+      </>)} else if (error){
+        return (
+          <>
+          <h1>{error}</h1>
+          <h2>Please return to the <a href="/">homepage</a> and try again</h2>
+          </>
+        )
+      }
       else {
     return(
 		<Container>

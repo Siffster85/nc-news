@@ -48,3 +48,9 @@ export function deleteComment(id) {
 export function getTopics() {
     return newsAPI.get('/topics')
 }
+
+export function patchComment(vote, id){
+    return newsAPI.patch(`/comments/${id}`, {inc_votes: vote}).then(({ data }) => {
+        return data
+    })
+}

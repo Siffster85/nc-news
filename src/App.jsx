@@ -25,7 +25,6 @@ function App() {
       <Route path="/articles/:article_id" element={<><ArticleCard/><CommentsList/></>} />
       <Route path="/users" element={<User />} />
       <Route path="/users/:username" element={<Account />} />
-     
     </Routes>
     </ActiveUserContext.Provider>
   )
