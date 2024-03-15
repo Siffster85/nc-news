@@ -95,7 +95,7 @@ function ArticleList() {
                 key={idx}
                 id={`sortBy-${idx}`}
                 type="radio"
-                variant={'outline-light'}
+                variant={'outline-primary'}
                 name="sortBy"
                 value={sortBy.value}
                 checked={sortByValue === sortBy.value}
@@ -113,7 +113,7 @@ function ArticleList() {
                 key={idx}
                 id={`order-${idx}`}
                 type="radio"
-                variant={'outline-warning'}
+                variant={'outline-dark'}
                 name="order"
                 value={order.value}
                 checked={sortOrder === order.value}
